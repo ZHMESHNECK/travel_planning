@@ -239,3 +239,4 @@ $RECYCLE.BIN/
 
 venv
 .vscode
+*.db

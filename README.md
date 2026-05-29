@@ -20,22 +20,33 @@ A RESTful API for managing travel projects and places to visit, built with **Fas
 ## Project Structure
 
 ```
-travel_planner/
-├── main.py                        # App entry point, router registration
-├── requirements.txt
-├── travel_planner.db              # Auto-created on first run
-└── app/
-    ├── database.py                # SQLAlchemy engine & session
-    ├── models/
-    │   └── models.py              # ORM models: Project, ProjectPlace
-    ├── schemas/
-    │   └── schemas.py             # Pydantic request/response schemas
-    ├── routers/
-    │   ├── projects.py            # /api/v1/projects endpoints
-    │   └── places.py              # /api/v1/projects/{id}/places endpoints
-    └── services/
-        ├── artic_service.py       # Art Institute of Chicago API client
-        └── project_service.py     # Business logic (CRUD, validation)
+travel_planning
+ ┣ app
+ ┃ ┣ db
+ ┃ ┃ ┣ models
+ ┃ ┃ ┃ ┗ models.py
+ ┃ ┃ ┣ schemas
+ ┃ ┃ ┃ ┗ schemas.py
+ ┃ ┃ ┗ engine.py
+ ┃ ┣ dependencies
+ ┃ ┃ ┣ auth.py
+ ┃ ┃ ┗ __init__.py
+ ┃ ┣ routers
+ ┃ ┃ ┣ places.py
+ ┃ ┃ ┗ projects.py
+ ┃ ┗ services
+ ┃ ┃ ┣ artic_service.py
+ ┃ ┃ ┗ project_service.py
+ ┣ .env
+ ┣ .expample.env
+ ┣ .gitignore
+ ┣ config.py
+ ┣ docker-compose.yml
+ ┣ Dockerfile
+ ┣ main.py
+ ┣ README.md
+ ┣ requirements.txt
+ ┗ travel_planner.db
 ```
 
 ---
