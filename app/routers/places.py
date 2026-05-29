@@ -1,17 +1,40 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.engine import get_db
-from app.db.schemas.schemas import PlaceCreate, PlaceResponse, PlaceUpdate
+from app.db.schemas.schemas import PaginatedResponse, PlaceCreate, PlaceResponse, PlaceUpdate
+from app.dependencies.auth import validate_basic_auth
 from app.services import project_service
 
-router = APIRouter(prefix="/projects/{project_id}/places", tags=["Places"])
+router = APIRouter(
+    prefix="/projects/{project_id}/places",
+    tags=["Places"],
+    dependencies=[Depends(validate_basic_auth)],
+)
 
 
-@router.get("/", response_model=list[PlaceResponse], summary="List all places in a project")
-async def list_places(project_id: int, db: AsyncSession = Depends(get_db)):
+@router.get("/", response_model=PaginatedResponse[PlaceResponse], summary="List all places in a project",
+            )
+async def list_places(
+    project_id: int,
+    is_visited: bool | None = Query(
+        None, description="Filter places by visited status."),
+    search: str | None = Query(
+        None, description="Search places by title, artist, or origin."),
+    limit: int = Query(
+        20, ge=1, le=100, description="Maximum number of places to return."),
+    offset: int = Query(0, ge=0, description="Number of places to skip."),
+    db: AsyncSession = Depends(get_db),
+):
     """Return all places associated with the given travel project."""
-    return await project_service.list_places(db, project_id)
+    return await project_service.list_places(
+        db,
+        project_id,
+        is_visited=is_visited,
+        search=search,
+        limit=limit,
+        offset=offset,
+    )
 
 
 @router.post("/", response_model=PlaceResponse, status_code=201, summary="Add a place to a project")

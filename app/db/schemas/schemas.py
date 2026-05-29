@@ -1,5 +1,17 @@
 from datetime import date, datetime
+from typing import Generic, TypeVar
+
 from pydantic import BaseModel, Field
+
+
+T = TypeVar("T")
+
+
+class PaginatedResponse(BaseModel, Generic[T]):
+    data: list[T]
+    total: int
+    limit: int
+    offset: int
 
 
 class PlaceBase(BaseModel):

@@ -1,13 +1,8 @@
-import os
 from collections.abc import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
+from config import DATABASE_URL
 
-# DATABASE_URL can be overridden via environment variable (e.g. in Docker)
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "sqlite+aiosqlite:///./travel_planner.db",
-)
 
 engine = create_async_engine(
     DATABASE_URL,

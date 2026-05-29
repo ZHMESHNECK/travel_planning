@@ -1,28 +1,54 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.engine import get_db
-from app.db.schemas.schemas import ProjectCreate, ProjectListResponse, ProjectResponse, ProjectUpdate
+from app.db.schemas.schemas import (
+    PaginatedResponse,
+    ProjectCreate,
+    ProjectListResponse,
+    ProjectResponse,
+    ProjectUpdate,
+)
+from app.dependencies.auth import validate_basic_auth
 from app.services import project_service
 
-router = APIRouter(prefix="/projects", tags=["Projects"])
+router = APIRouter(
+    prefix="/projects",
+    tags=["Projects"],
+    dependencies=[Depends(validate_basic_auth)],
+)
 
 
-@router.get("/", response_model=list[ProjectListResponse], summary="List all travel projects")
-async def list_projects(db: AsyncSession = Depends(get_db)):
+@router.get(
+    "/",
+    response_model=PaginatedResponse[ProjectListResponse],
+    summary="List all travel projects",
+)
+async def list_projects(
+    is_completed: bool | None = Query(None, description="Filter projects by completion status."),
+    search: str | None = Query(None, description="Search projects by name."),
+    limit: int = Query(20, ge=1, le=100, description="Maximum number of projects to return."),
+    offset: int = Query(0, ge=0, description="Number of projects to skip."),
+    db: AsyncSession = Depends(get_db),
+):
     """Return all travel projects with aggregated place counts."""
-    projects = await project_service.list_projects(db)
-    return [
-        ProjectListResponse(
-            **{col: getattr(p, col) for col in [
-                "row_id", "name", "description", "start_date",
-                "is_completed", "created_at", "updated_at",
-            ]},
-            places_count=len(p.places),
-            visited_count=sum(1 for pl in p.places if pl.is_visited),
-        )
-        for p in projects
-    ]
+    result = await project_service.list_projects(db, is_completed=is_completed, search=search, limit=limit, offset=offset)
+    return {
+        "data": [
+            ProjectListResponse(
+                **{col: getattr(p, col) for col in [
+                    "row_id", "name", "description", "start_date",
+                    "is_completed", "created_at", "updated_at",
+                ]},
+                places_count=len(p.places),
+                visited_count=sum(1 for pl in p.places if pl.is_visited),
+            )
+            for p in result["data"]
+        ],
+        "total": result["total"],
+        "limit": result["limit"],
+        "offset": result["offset"],
+    }
 
 
 @router.post("/", response_model=ProjectResponse, status_code=201, summary="Create a travel project")

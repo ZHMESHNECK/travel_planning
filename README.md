@@ -75,6 +75,8 @@ uvicorn main:app --reload
 The API will be available at **http://localhost:8000**.  
 The SQLite database (`travel_planner.db`) is created automatically on first run.
 
+For API endpoints under `/api/v1`, basic authentication is enabled. Use the environment variables `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` to configure credentials (Docker defaults are `admin` / `changeme`).
+
 ---
 
 ## Interactive Documentation

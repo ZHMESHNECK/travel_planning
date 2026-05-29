@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
@@ -6,8 +6,7 @@ from fastapi import HTTPException
 from app.db.models.models import Project, ProjectPlace
 from app.db.schemas.schemas import ProjectCreate, ProjectUpdate, PlaceCreate, PlaceUpdate
 from app.services.artic_service import fetch_artwork
-
-MAX_PLACES_PER_PROJECT = 10
+from config import MAX_PLACES_PER_PROJECT
 
 
 async def get_project_or_404(db: AsyncSession, project_id: int) -> Project:
@@ -23,14 +22,34 @@ async def get_project_or_404(db: AsyncSession, project_id: int) -> Project:
     return project
 
 
-async def list_projects(db: AsyncSession) -> list[Project]:
-    """Return all projects (with places) ordered by creation date descending."""
-    result = await db.execute(
-        select(Project)
-        .options(selectinload(Project.places))
-        .order_by(Project.created_at.desc())
-    )
-    return result.scalars().all()
+async def list_projects(
+    db: AsyncSession,
+    is_completed: bool | None = None,
+    search: str | None = None,
+    limit: int = 20,
+    offset: int = 0,
+) -> dict:
+    """Return a filtered, paginated list of projects with place count metadata."""
+    count_query = select(func.count()).select_from(Project)
+    select_query = select(Project).options(selectinload(Project.places)).order_by(Project.created_at.desc())
+
+    if is_completed is not None:
+        count_query = count_query.where(Project.is_completed == is_completed)
+        select_query = select_query.where(Project.is_completed == is_completed)
+
+    if search:
+        search_term = f"%{search}%"
+        count_query = count_query.where(Project.name.ilike(search_term))
+        select_query = select_query.where(Project.name.ilike(search_term))
+
+    total = (await db.execute(count_query)).scalar_one()
+    result = await db.execute(select_query.limit(limit).offset(offset))
+    return {
+        "data": result.scalars().all(),
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 async def create_project(db: AsyncSession, data: ProjectCreate) -> Project:
@@ -116,15 +135,46 @@ async def get_place_or_404(db: AsyncSession, project_id: int, place_id: int) -> 
     return place
 
 
-async def list_places(db: AsyncSession, project_id: int) -> list[ProjectPlace]:
-    """List all places for a given project."""
+async def list_places(
+    db: AsyncSession,
+    project_id: int,
+    is_visited: bool | None = None,
+    search: str | None = None,
+    limit: int = 20,
+    offset: int = 0,
+) -> dict:
+    """List places for a project with optional visited filter and pagination."""
     await get_project_or_404(db, project_id)  # Ensure the project exists
-    result = await db.execute(
+
+    base_filter = [ProjectPlace.project_id == project_id]
+    if is_visited is not None:
+        base_filter.append(ProjectPlace.is_visited == is_visited)
+
+    select_query = (
         select(ProjectPlace)
-        .where(ProjectPlace.project_id == project_id)
+        .where(*base_filter)
         .order_by(ProjectPlace.created_at.asc())
     )
-    return result.scalars().all()
+    count_query = select(func.count()).select_from(ProjectPlace).where(*base_filter)
+
+    if search:
+        search_term = f"%{search}%"
+        search_filter = or_(
+            ProjectPlace.title.ilike(search_term),
+            ProjectPlace.artist.ilike(search_term),
+            ProjectPlace.place_of_origin.ilike(search_term),
+        )
+        select_query = select_query.where(search_filter)
+        count_query = count_query.where(search_filter)
+
+    total = (await db.execute(count_query)).scalar_one()
+    result = await db.execute(select_query.limit(limit).offset(offset))
+    return {
+        "data": result.scalars().all(),
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 async def add_place_to_project(

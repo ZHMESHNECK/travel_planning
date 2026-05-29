@@ -1,11 +1,33 @@
-import httpx
+from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException
+from config import ARTIC_CACHE_TTL_SECONDS, ARTWORK_FIELDS, ARTIC_BASE_URL, ARTIC_IMAGE_BASE_URL
+import asyncio
+import httpx
 
-ARTIC_BASE_URL = "https://api.artic.edu/api/v1"
-ARTIC_IMAGE_BASE_URL = "https://www.artic.edu/iiif/2"
 
-# Fields we need from the artwork endpoint
-ARTWORK_FIELDS = "id,title,artist_display,place_of_origin,image_id"
+
+_artic_cache: dict[int, tuple[dict, datetime]] = {}
+_artic_cache_lock = asyncio.Lock()
+
+
+async def _get_cached_artwork(artwork_id: int) -> dict | None:
+    entry = _artic_cache.get(artwork_id)
+    if not entry:
+        return None
+
+    data, expires_at = entry
+    if datetime.now(timezone.utc) >= expires_at:
+        async with _artic_cache_lock:
+            _artic_cache.pop(artwork_id, None)
+        return None
+
+    return data.copy()
+
+
+async def _set_cached_artwork(artwork_id: int, artwork: dict) -> None:
+    expires_at = datetime.now(timezone.utc) + timedelta(seconds=ARTIC_CACHE_TTL_SECONDS)
+    async with _artic_cache_lock:
+        _artic_cache[artwork_id] = (artwork.copy(), expires_at)
 
 
 async def fetch_artwork(artwork_id: int) -> dict:
@@ -13,6 +35,10 @@ async def fetch_artwork(artwork_id: int) -> dict:
     Fetch a single artwork from the Art Institute of Chicago API.
     Raises HTTP 422 if the artwork does not exist.
     """
+    cached = await _get_cached_artwork(artwork_id)
+    if cached is not None:
+        return cached
+
     url = f"{ARTIC_BASE_URL}/artworks/{artwork_id}"
     params = {"fields": ARTWORK_FIELDS}
 
@@ -37,8 +63,16 @@ async def fetch_artwork(artwork_id: int) -> dict:
             detail="Unexpected response from the Art Institute of Chicago API.",
         )
 
-    data = response.json().get("data", {})
-    return _normalize_artwork(data)
+    data = response.json().get("data")
+    if not isinstance(data, dict):
+        raise HTTPException(
+            status_code=502,
+            detail="Unexpected data returned from the Art Institute of Chicago API.",
+        )
+
+    artwork = _normalize_artwork(data)
+    await _set_cached_artwork(artwork_id, artwork)
+    return artwork
 
 
 def _normalize_artwork(data: dict) -> dict:
