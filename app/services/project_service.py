@@ -14,7 +14,7 @@ async def get_project_or_404(db: AsyncSession, project_id: int) -> Project:
     """Fetch a project (with places eagerly loaded) by ID or raise 404."""
     result = await db.execute(
         select(Project)
-        .where(Project.id == project_id)
+        .where(Project.row_id == project_id)
         .options(selectinload(Project.places))  # Avoid lazy-load in async context
     )
     project = result.scalar_one_or_none()
@@ -55,16 +55,16 @@ async def create_project(db: AsyncSession, data: ProjectCreate) -> Project:
         start_date=data.start_date,
     )
     db.add(project)
-    await db.flush()  # Obtain project.id before inserting places
+    await db.flush()  # Obtain project.row_id before inserting places
 
     for place_data in data.places:
         artwork = await fetch_artwork(place_data.external_id)
-        db.add(ProjectPlace(project_id=project.id, **artwork))
+        db.add(ProjectPlace(project_id=project.row_id, **artwork))
 
     await db.commit()
 
     # Re-fetch with relationships loaded so the response serialises correctly
-    return await get_project_or_404(db, project.id)
+    return await get_project_or_404(db, project.row_id)
 
 
 async def update_project(db: AsyncSession, project_id: int, data: ProjectUpdate) -> Project:
@@ -99,15 +99,11 @@ async def delete_project(db: AsyncSession, project_id: int) -> None:
     await db.commit()
 
 
-# ---------------------------------------------------------------------------
-# Place CRUD
-# ---------------------------------------------------------------------------
-
 async def get_place_or_404(db: AsyncSession, project_id: int, place_id: int) -> ProjectPlace:
     """Fetch a project place by ID, ensuring it belongs to the given project."""
     result = await db.execute(
         select(ProjectPlace).where(
-            ProjectPlace.id == place_id,
+            ProjectPlace.row_id == place_id,
             ProjectPlace.project_id == project_id,
         )
     )

@@ -15,7 +15,7 @@ async def list_projects(db: AsyncSession = Depends(get_db)):
     return [
         ProjectListResponse(
             **{col: getattr(p, col) for col in [
-                "id", "name", "description", "start_date",
+                "row_id", "name", "description", "start_date",
                 "is_completed", "created_at", "updated_at",
             ]},
             places_count=len(p.places),
