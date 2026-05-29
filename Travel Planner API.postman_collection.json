@@ -1,0 +1,1696 @@
+{
+  "info": {
+    "_postman_id": "3577794a-b810-4df7-96dd-925160c65091",
+    "name": "Travel Planner API",
+    "description": "A management application that helps travellers plan trips and collect desired places to visit. Places are artworks from the Art Institute of Chicago.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23842799",
+    "_collection_link": "https://go.postman.co/collection/23842799-3577794a-b810-4df7-96dd-925160c65091?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{project_id}",
+                  "item": [
+                    {
+                      "name": "places",
+                      "item": [
+                        {
+                          "name": "{place_id}",
+                          "item": [
+                            {
+                              "name": "Get a single place in a project",
+                              "request": {
+                                "auth": {
+                                  "type": "basic",
+                                  "basic": [
+                                    {
+                                      "key": "username",
+                                      "value": "{{basicAuthUsername}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "password",
+                                      "value": "{{basicAuthPassword}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ":place_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    },
+                                    {
+                                      "key": "place_id",
+                                      "value": "8932"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieve a single place from the given project."
+                              },
+                              "response": [
+                                {
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "places",
+                                        ":place_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id",
+                                          "value": "6026"
+                                        },
+                                        {
+                                          "key": "place_id",
+                                          "value": "8932"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"row_id\": 8766,\n  \"project_id\": 9559,\n  \"external_id\": 1499,\n  \"title\": \"string\",\n  \"artist\": \"string\",\n  \"place_of_origin\": null,\n  \"image_url\": null,\n  \"notes\": null,\n  \"is_visited\": true,\n  \"created_at\": \"1999-02-09T21:01:40.718Z\",\n  \"updated_at\": \"2017-04-01T20:07:39.821Z\"\n}"
+                                },
+                                {
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "places",
+                                        ":place_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id",
+                                          "value": "6026"
+                                        },
+                                        {
+                                          "key": "place_id",
+                                          "value": "8932"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Update a place in a project",
+                              "request": {
+                                "auth": {
+                                  "type": "basic",
+                                  "basic": [
+                                    {
+                                      "key": "username",
+                                      "value": "{{basicAuthUsername}}",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "password",
+                                      "value": "{{basicAuthPassword}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"notes\": \"string\",\n  \"is_visited\": false\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ":place_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    },
+                                    {
+                                      "key": "place_id",
+                                      "value": "8932"
+                                    }
+                                  ]
+                                },
+                                "description": "Update notes or visited status for a place.\nWhen all places in the project are marked as visited,\nthe project is automatically marked as completed."
+                              },
+                              "response": [
+                                {
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"notes\": \"string\",\n  \"is_visited\": false\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "places",
+                                        ":place_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id",
+                                          "value": "6026"
+                                        },
+                                        {
+                                          "key": "place_id",
+                                          "value": "8932"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"row_id\": 8766,\n  \"project_id\": 9559,\n  \"external_id\": 1499,\n  \"title\": \"string\",\n  \"artist\": \"string\",\n  \"place_of_origin\": null,\n  \"image_url\": null,\n  \"notes\": null,\n  \"is_visited\": true,\n  \"created_at\": \"1999-02-09T21:01:40.718Z\",\n  \"updated_at\": \"2017-04-01T20:07:39.821Z\"\n}"
+                                },
+                                {
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "PATCH",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"notes\": \"string\",\n  \"is_visited\": false\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/:place_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "projects",
+                                        ":project_id",
+                                        "places",
+                                        ":place_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "project_id",
+                                          "value": "6026"
+                                        },
+                                        {
+                                          "key": "place_id",
+                                          "value": "8932"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "List all places in a project",
+                          "request": {
+                            "auth": {
+                              "type": "basic",
+                              "basic": [
+                                {
+                                  "key": "username",
+                                  "value": "{{basicAuthUsername}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "password",
+                                  "value": "{{basicAuthPassword}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/?is_visited=true&search=string&limit=20&offset=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "places",
+                                ""
+                              ],
+                              "query": [
+                                {
+                                  "key": "is_visited",
+                                  "value": "true",
+                                  "description": "Filter places by visited status."
+                                },
+                                {
+                                  "key": "search",
+                                  "value": "string",
+                                  "description": "Search places by title, artist, or origin."
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "20",
+                                  "description": "Maximum number of places to return."
+                                },
+                                {
+                                  "key": "offset",
+                                  "value": "0",
+                                  "description": "Number of places to skip."
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            },
+                            "description": "Return all places associated with the given travel project."
+                          },
+                          "response": [
+                            {
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/?is_visited=true&search=string&limit=20&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter places by visited status.",
+                                      "key": "is_visited",
+                                      "value": "true"
+                                    },
+                                    {
+                                      "description": "Search places by title, artist, or origin.",
+                                      "key": "search",
+                                      "value": "string"
+                                    },
+                                    {
+                                      "description": "Maximum number of places to return.",
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "description": "Number of places to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"data\": [\n    {\n      \"row_id\": 9440,\n      \"project_id\": 2001,\n      \"external_id\": 7106,\n      \"title\": \"string\",\n      \"artist\": \"string\",\n      \"place_of_origin\": \"string\",\n      \"image_url\": null,\n      \"notes\": \"string\",\n      \"is_visited\": false,\n      \"created_at\": \"2008-02-26T20:02:26.601Z\",\n      \"updated_at\": \"1971-02-17T16:27:28.258Z\"\n    },\n    {\n      \"row_id\": 6788,\n      \"project_id\": 3285,\n      \"external_id\": 9264,\n      \"title\": \"string\",\n      \"artist\": \"string\",\n      \"place_of_origin\": \"string\",\n      \"image_url\": null,\n      \"notes\": \"string\",\n      \"is_visited\": true,\n      \"created_at\": \"1963-09-21T07:32:51.503Z\",\n      \"updated_at\": \"2008-01-13T19:32:04.170Z\"\n    }\n  ],\n  \"total\": 4929,\n  \"limit\": 5077,\n  \"offset\": 926\n}"
+                            },
+                            {
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/?is_visited=true&search=string&limit=20&offset=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ""
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter places by visited status.",
+                                      "key": "is_visited",
+                                      "value": "true"
+                                    },
+                                    {
+                                      "description": "Search places by title, artist, or origin.",
+                                      "key": "search",
+                                      "value": "string"
+                                    },
+                                    {
+                                      "description": "Maximum number of places to return.",
+                                      "key": "limit",
+                                      "value": "20"
+                                    },
+                                    {
+                                      "description": "Number of places to skip.",
+                                      "key": "offset",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Add a place to a project",
+                          "request": {
+                            "auth": {
+                              "type": "basic",
+                              "basic": [
+                                {
+                                  "key": "username",
+                                  "value": "{{basicAuthUsername}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "password",
+                                  "value": "{{basicAuthPassword}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"external_id\": 3998\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id",
+                                "places",
+                                ""
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            },
+                            "description": "Add a new place (artwork) to an existing project.\nThe artwork must exist in the Art Institute of Chicago API.\nA project may have at most 10 places; duplicate artworks are rejected."
+                          },
+                          "response": [
+                            {
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"external_id\": 3998\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"row_id\": 8766,\n  \"project_id\": 9559,\n  \"external_id\": 1499,\n  \"title\": \"string\",\n  \"artist\": \"string\",\n  \"place_of_origin\": null,\n  \"image_url\": null,\n  \"notes\": null,\n  \"is_visited\": true,\n  \"created_at\": \"1999-02-09T21:01:40.718Z\",\n  \"updated_at\": \"2017-04-01T20:07:39.821Z\"\n}"
+                            },
+                            {
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"external_id\": 3998\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/projects/:project_id/places/",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "projects",
+                                    ":project_id",
+                                    "places",
+                                    ""
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "project_id",
+                                      "value": "6026"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Get a single travel project",
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id",
+                              "value": "6026"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single project with all its associated places."
+                      },
+                      "response": [
+                        {
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"row_id\": 1952,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"start_date\": \"2004-02-18\",\n  \"is_completed\": false,\n  \"created_at\": \"2003-07-03T00:28:47.889Z\",\n  \"updated_at\": \"2003-04-25T21:59:52.931Z\"\n}"
+                        },
+                        {
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Update a travel project",
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id",
+                              "value": "6026"
+                            }
+                          ]
+                        },
+                        "description": "Update project name, description, or start date."
+                      },
+                      "response": [
+                        {
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"row_id\": 1952,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"start_date\": \"2004-02-18\",\n  \"is_completed\": false,\n  \"created_at\": \"2003-07-03T00:28:47.889Z\",\n  \"updated_at\": \"2003-04-25T21:59:52.931Z\"\n}"
+                        },
+                        {
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Delete a travel project",
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ":project_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "project_id",
+                              "value": "6026"
+                            }
+                          ]
+                        },
+                        "description": "Delete a project. Returns 409 if any of the project's places\nhave already been marked as visited."
+                      },
+                      "response": [
+                        {
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "body": ""
+                        },
+                        {
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/projects/:project_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "projects",
+                                ":project_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "project_id",
+                                  "value": "6026"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "List all travel projects",
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/projects/?is_completed=false&search=string&limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "projects",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "key": "is_completed",
+                          "value": "false",
+                          "description": "Filter projects by completion status."
+                        },
+                        {
+                          "key": "search",
+                          "value": "string",
+                          "description": "Search projects by name."
+                        },
+                        {
+                          "key": "limit",
+                          "value": "20",
+                          "description": "Maximum number of projects to return."
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0",
+                          "description": "Number of projects to skip."
+                        }
+                      ]
+                    },
+                    "description": "Return all travel projects with aggregated place counts."
+                  },
+                  "response": [
+                    {
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/?is_completed=false&search=string&limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter projects by completion status.",
+                              "key": "is_completed",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Search projects by name.",
+                              "key": "search",
+                              "value": "string"
+                            },
+                            {
+                              "description": "Maximum number of projects to return.",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of projects to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"data\": [\n    {\n      \"row_id\": 8532,\n      \"name\": \"string\",\n      \"description\": null,\n      \"start_date\": null,\n      \"is_completed\": false,\n      \"created_at\": \"2002-11-19T20:45:18.388Z\",\n      \"updated_at\": \"1987-08-21T21:23:02.279Z\",\n      \"places_count\": 0,\n      \"visited_count\": 0\n    },\n    {\n      \"row_id\": 7972,\n      \"name\": \"string\",\n      \"description\": null,\n      \"start_date\": null,\n      \"is_completed\": false,\n      \"created_at\": \"1988-03-28T08:28:01.995Z\",\n      \"updated_at\": \"1960-08-15T04:33:33.623Z\",\n      \"places_count\": 0,\n      \"visited_count\": 0\n    }\n  ],\n  \"total\": 63,\n  \"limit\": 8140,\n  \"offset\": 4309\n}"
+                    },
+                    {
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/?is_completed=false&search=string&limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter projects by completion status.",
+                              "key": "is_completed",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Search projects by name.",
+                              "key": "search",
+                              "value": "string"
+                            },
+                            {
+                              "description": "Maximum number of projects to return.",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Number of projects to skip.",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Create a travel project",
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null,\n  \"places\": [\n    {\n      \"external_id\": 8901\n    },\n    {\n      \"external_id\": 1696\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/projects/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "projects",
+                        ""
+                      ]
+                    },
+                    "description": "Create a travel project. Optionally include an array of place IDs (artworks)\nto add to the project at creation time. Each place is validated against the\nArt Institute of Chicago API."
+                  },
+                  "response": [
+                    {
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null,\n  \"places\": [\n    {\n      \"external_id\": 8901\n    },\n    {\n      \"external_id\": 1696\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"row_id\": 1952,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"start_date\": \"2004-02-18\",\n  \"is_completed\": false,\n  \"created_at\": \"2003-07-03T00:28:47.889Z\",\n  \"updated_at\": \"2003-04-25T21:59:52.931Z\"\n}"
+                    },
+                    {
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"string\",\n  \"description\": null,\n  \"start_date\": null,\n  \"places\": [\n    {\n      \"external_id\": 8901\n    },\n    {\n      \"external_id\": 1696\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/projects/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "projects",
+                            ""
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        7737,\n        1063\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        5352,\n        8949\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            },
+            "description": "Basic health check endpoint."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}
